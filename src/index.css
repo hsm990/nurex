@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono&display=swap');
+
+:root {
+    --brand: #2563FF;
+    --brand-hover: #1A4FD8;
+    --text: #0B0F1A;
+    --text-muted: #6B7280;
+    --pill-bg: #F0F2F8;
+    --nav-bg: transparent;
+    --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
+    --nav-border-scrolled: rgba(0, 0, 0, 0.08);
+    --radius-pill: 999px;
+    --radius-item: 20px;
+    --transition: 0.25s ease;
+}
