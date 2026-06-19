@@ -1,39 +1,27 @@
-/* ── Variables ── */
-:root {
-    --brand: #3733FD;
-    --brand-hover: #2a27d6;
-    --pill-bg: #e7eaf0;
-    --pill-bg-scrolled: rgba(231, 234, 240, 0.55);
-    --nav-bg: transparent;
-    --nav-bg-scrolled: rgba(255, 255, 255, 0.75);
-    --nav-border-scrolled: rgba(255, 255, 255, 0.4);
-    --text: #0d0d0d;
-    --text-muted: #555;
-    --radius-pill: 16px;
-    --radius-item: 12px;
-    --nav-height: 80px;
-    --transition: 0.3s ease;
-}
-
-/* ── Nav base ── */
 nav {
-    padding: 12px 0;
+    padding: 14px 0;
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--nav-bg);
-    transition: background var(--transition), backdrop-filter var(--transition),
-        box-shadow var(--transition), border-bottom var(--transition);
+    transition:
+        background var(--transition),
+        backdrop-filter var(--transition),
+        box-shadow var(--transition),
+        padding var(--transition);
 }
 
 nav.scrolled {
     background: var(--nav-bg-scrolled);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 1px 0 var(--nav-border-scrolled), 0 4px 24px rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 1px 0 var(--nav-border-scrolled),
+        0 4px 24px rgba(0, 0, 0, 0.06);
+    padding: 0;
 }
 
-/* ── Container ── */
+/* ── Container ───────────────────────────────────────────────────────────── */
 .nav-container {
     width: 90%;
     max-width: 1400px;
@@ -41,10 +29,21 @@ nav.scrolled {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 10px;
+    transition:
+        gap var(--transition),
+        width var(--transition),
+        max-width var(--transition),
+        padding var(--transition);
 }
 
-/* ── Logo ── */
+nav.scrolled .nav-container {
+    width: 100%;
+    max-width: 100%;
+    gap: 0;
+}
+
+/* ── Logo ────────────────────────────────────────────────────────────────── */
 .logo {
     width: 150px;
     height: 60px;
@@ -52,16 +51,34 @@ nav.scrolled {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-item);
     cursor: pointer;
     text-decoration: none;
     flex-shrink: 0;
-    transition: box-shadow var(--transition), transform var(--transition);
+    transition:
+        box-shadow var(--transition),
+        transform var(--transition),
+        border-radius var(--transition),
+        background var(--transition),
+        width var(--transition),
+        padding var(--transition);
+}
+
+nav.scrolled .logo {
+    border-radius: 0;
+    background: transparent;
+    width: 160px;
+    padding: 0 20px;
 }
 
 .logo:hover {
-    box-shadow: 0 4px 16px rgba(55, 51, 253, 0.15);
+    box-shadow: 0 4px 16px rgba(37, 99, 255, 0.18);
     transform: translateY(-1px);
+}
+
+nav.scrolled .logo:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .logo img {
@@ -69,14 +86,28 @@ nav.scrolled {
     height: auto;
 }
 
-/* ── Desktop links ── */
+/* ── Desktop links pill ──────────────────────────────────────────────────── */
 .links {
     background: var(--pill-bg);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-item);
     height: 60px;
     display: flex;
     align-items: center;
     padding: 0 8px;
+    transition:
+        border-radius var(--transition),
+        background var(--transition),
+        height var(--transition),
+        flex var(--transition),
+        padding var(--transition);
+}
+
+nav.scrolled .links {
+    border-radius: 0;
+    background: transparent;
+    height: 60px;
+    flex: 1;
+    justify-content: center;
 }
 
 .links ul {
@@ -90,9 +121,9 @@ nav.scrolled {
 .links .nav-links a {
     text-decoration: none;
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 16px 16px;
     border-radius: var(--radius-item);
     transition: all var(--transition);
     display: block;
@@ -106,74 +137,134 @@ nav.scrolled {
 
 .links .nav-links a.active {
     background: white;
-    color: var(--brand);
-    box-shadow: 0 2px 8px rgba(55, 51, 253, 0.12);
+    color: black;
+    box-shadow: 0 2px 8px rgba(37, 99, 255, 0.12);
 }
 
-/* ── Right side ── */
+nav.scrolled .links .nav-links a:hover {
+    background: var(--pill-bg);
+}
+
+nav.scrolled .links .nav-links a.active {
+    background: var(--pill-bg);
+}
+
+/* ── Right group ─────────────────────────────────────────────────────────── */
 .nav-right {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    transition: gap var(--transition);
 }
 
-/* ── Social icons ── */
+nav.scrolled .nav-right {
+    gap: 0;
+}
+
+/* ── Divider (visible only when scrolled) ────────────────────────────────── */
+.nav-divider {
+    width: 0;
+    height: 24px;
+    border-left: 0.5px solid transparent;
+    flex-shrink: 0;
+    transition: border-color var(--transition);
+}
+
+nav.scrolled .nav-divider {
+    border-left-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ── Social icons pill ───────────────────────────────────────────────────── */
 .social {
-    background-color: var(--pill-bg);
-    border-radius: var(--radius-pill);
+    background: var(--pill-bg);
+    border-radius: var(--radius-item);
     height: 60px;
     display: flex;
     align-items: center;
-    gap: 4px;
     padding: 0 8px;
+    transition:
+        border-radius var(--transition),
+        background var(--transition),
+        height var(--transition),
+        padding var(--transition);
+    width: 120px;
+}
+
+nav.scrolled .social {
+    border-radius: 0;
+    background: transparent;
+    height: 52px;
+    padding: 0 12px;
 }
 
 .social-span {
-    width: 44px;
-    height: 44px;
+    width: 90%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-item);
+    border-radius: 20px;
     color: var(--brand);
-    font-size: 18px;
+    background: #F0F0F0;
+    font-size: 25px;
     cursor: pointer;
     transition: all var(--transition);
     text-decoration: none;
 }
 
 .social-span:hover {
-    background-color: white;
+    background: white;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(55, 51, 253, 0.15);
+    box-shadow: 0 2px 8px rgba(37, 99, 255, 0.15);
 }
 
-/* ── CTA Button ── */
+nav.scrolled .social-span:hover {
+    background: var(--pill-bg);
+    transform: none;
+    box-shadow: none;
+}
+
+/* ── CTA button ──────────────────────────────────────────────────────────── */
 .nav-cta {
     height: 60px;
     padding: 0 24px;
     background: var(--brand);
     color: white;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-item);
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
     transition: all var(--transition);
-    box-shadow: 0 4px 16px rgba(55, 51, 253, 0.3);
+    box-shadow: 0 4px 16px rgba(37, 99, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
 }
 
 .nav-cta:hover {
     background: var(--brand-hover);
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(55, 51, 253, 0.4);
+    box-shadow: 0 6px 20px rgba(37, 99, 255, 0.4);
 }
 
-/* ── Hamburger ── */
+nav.scrolled .nav-cta {
+    border-radius: 0;
+    height: 52px;
+    box-shadow: none;
+    padding: 0 28px;
+}
+
+nav.scrolled .nav-cta:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* ── Hamburger ───────────────────────────────────────────────────────────── */
 .hamburger {
     display: none;
     width: 44px;
@@ -193,7 +284,7 @@ nav.scrolled {
     background: white;
 }
 
-/* ── Mobile Menu ── */
+/* ── Mobile menu ─────────────────────────────────────────────────────────── */
 .mobile-menu {
     position: fixed;
     top: 0;
@@ -210,7 +301,8 @@ nav.scrolled {
     padding: 40px;
     transform: translateY(-100%);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
         opacity 0.3s ease;
     pointer-events: none;
 }
@@ -258,18 +350,18 @@ nav.scrolled {
     min-width: 140px;
 }
 
-/* ── Overlay ── */
+/* ── Overlay ─────────────────────────────────────────────────────────────── */
 .menu-overlay {
     position: fixed;
     inset: 0;
     z-index: 98;
 }
 
-/* ── Responsive ── */
+/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .links .nav-links a {
-        padding: 10px 14px;
-        font-size: 14px;
+        padding: 9px 12px;
+        font-size: 13px;
     }
 }
 
@@ -287,10 +379,15 @@ nav.scrolled {
 
     .logo {
         width: 120px;
-        height: 52px;
+        height: 50px;
     }
 
     .logo img {
         width: 100px;
+    }
+
+    nav.scrolled .nav-container {
+        width: 90%;
+        padding: 0;
     }
 }
