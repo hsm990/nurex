@@ -1,0 +1,296 @@
+/* ── Variables ── */
+:root {
+    --brand: #3733FD;
+    --brand-hover: #2a27d6;
+    --pill-bg: #e7eaf0;
+    --pill-bg-scrolled: rgba(231, 234, 240, 0.55);
+    --nav-bg: transparent;
+    --nav-bg-scrolled: rgba(255, 255, 255, 0.75);
+    --nav-border-scrolled: rgba(255, 255, 255, 0.4);
+    --text: #0d0d0d;
+    --text-muted: #555;
+    --radius-pill: 16px;
+    --radius-item: 12px;
+    --nav-height: 80px;
+    --transition: 0.3s ease;
+}
+
+/* ── Nav base ── */
+nav {
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    transition: background var(--transition), backdrop-filter var(--transition),
+        box-shadow var(--transition), border-bottom var(--transition);
+}
+
+nav.scrolled {
+    background: var(--nav-bg-scrolled);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--nav-border-scrolled), 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Container ── */
+.nav-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* ── Logo ── */
+.logo {
+    width: 150px;
+    height: 60px;
+    background: var(--pill-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.logo:hover {
+    box-shadow: 0 4px 16px rgba(55, 51, 253, 0.15);
+    transform: translateY(-1px);
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* ── Desktop links ── */
+.links {
+    background: var(--pill-bg);
+    border-radius: var(--radius-pill);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.links ul {
+    list-style: none;
+    display: flex;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+}
+
+.links .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius-item);
+    transition: all var(--transition);
+    display: block;
+    white-space: nowrap;
+}
+
+.links .nav-links a:hover {
+    background: white;
+    color: var(--text);
+}
+
+.links .nav-links a.active {
+    background: white;
+    color: var(--brand);
+    box-shadow: 0 2px 8px rgba(55, 51, 253, 0.12);
+}
+
+/* ── Right side ── */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* ── Social icons ── */
+.social {
+    background-color: var(--pill-bg);
+    border-radius: var(--radius-pill);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+}
+
+.social-span {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-item);
+    color: var(--brand);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.social-span:hover {
+    background-color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(55, 51, 253, 0.15);
+}
+
+/* ── CTA Button ── */
+.nav-cta {
+    height: 60px;
+    padding: 0 24px;
+    background: var(--brand);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: all var(--transition);
+    box-shadow: 0 4px 16px rgba(55, 51, 253, 0.3);
+}
+
+.nav-cta:hover {
+    background: var(--brand-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(55, 51, 253, 0.4);
+}
+
+/* ── Hamburger ── */
+.hamburger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-item);
+    background: var(--pill-bg);
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--text);
+    transition: all var(--transition);
+}
+
+.hamburger:hover {
+    background: white;
+}
+
+/* ── Mobile Menu ── */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-menu ul a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 600;
+    padding: 12px 0;
+    display: block;
+    border-bottom: 1px solid #eee;
+    transition: color var(--transition);
+}
+
+.mobile-menu ul a:hover,
+.mobile-menu ul a.active {
+    color: var(--brand);
+}
+
+.mobile-bottom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mobile-bottom .nav-cta {
+    flex: 1;
+    min-width: 140px;
+}
+
+/* ── Overlay ── */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 98;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .links .nav-links a {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .links,
+    .social,
+    .nav-cta {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .logo {
+        width: 120px;
+        height: 52px;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+}
