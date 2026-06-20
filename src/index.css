@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono&display=swap');
 
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
 :root {
     --brand: #2563FF;
     --brand-hover: #1A4FD8;
@@ -10,6 +22,17 @@
     --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
     --nav-border-scrolled: rgba(0, 0, 0, 0.08);
     --radius-pill: 999px;
-    --radius-item: 20px;
+    --radius-item: 15px;
     --transition: 0.25s ease;
+
+    --color-midnight: #0B0F1A;
+    --color-brand: #2563FF;
+    --color-accent: #10B981;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.main-content {
+    padding-top: 88px;
 }

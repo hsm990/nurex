@@ -1,7 +1,9 @@
 nav {
     padding: 14px 0;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     background: var(--nav-bg);
     transition:
@@ -30,6 +32,7 @@ nav.scrolled {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    position: relative;
     transition:
         gap var(--transition),
         width var(--transition),
@@ -38,9 +41,9 @@ nav.scrolled {
 }
 
 nav.scrolled .nav-container {
-    width: 100%;
-    max-width: 100%;
-    gap: 0;
+    width: 90%;
+    max-width: 1400px;
+    gap: 10px;
 }
 
 /* ── Logo ────────────────────────────────────────────────────────────────── */
@@ -94,11 +97,13 @@ nav.scrolled .logo:hover {
     display: flex;
     align-items: center;
     padding: 0 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     transition:
         border-radius var(--transition),
         background var(--transition),
         height var(--transition),
-        flex var(--transition),
         padding var(--transition);
 }
 
@@ -106,8 +111,7 @@ nav.scrolled .links {
     border-radius: 0;
     background: transparent;
     height: 60px;
-    flex: 1;
-    justify-content: center;
+    padding: 0;
 }
 
 .links ul {
@@ -123,7 +127,7 @@ nav.scrolled .links {
     color: var(--text-muted);
     font-size: 18px;
     font-weight: 500;
-    padding: 16px 16px;
+    padding: 12px 12px;
     border-radius: var(--radius-item);
     transition: all var(--transition);
     display: block;
@@ -360,7 +364,7 @@ nav.scrolled .nav-cta:hover {
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .links .nav-links a {
-        padding: 9px 12px;
+        padding: 6px 10px;
         font-size: 13px;
     }
 }
