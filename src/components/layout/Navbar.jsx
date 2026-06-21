@@ -18,7 +18,7 @@ export default function Navbar() {
 
   // Close menu on resize to desktop
   useEffect(() => {
-    const handleResize = () => { if (window.innerWidth > 768) setMenuOpen(false) }
+    const handleResize = () => { if (window.innerWidth > 992) setMenuOpen(false) }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])

@@ -34,7 +34,9 @@ export default function Hero() {
             <div className="hero-content">
                 <div className="hero-main">
                     <h1 className="hero-title">
-                        <span><img className="hero-title-b" src={key} alt="B" /></span>uild. <em><span><img className="hero-title-b" src={key1} alt="B" /></span>anage.</em><br /><span><img className="hero-title-b" src={key2} alt="B" /></span>utomate.
+                        <span className="hero-word"><span><img className="hero-title-b" src={key} alt="B" /></span>uild.</span>
+                        <span className="hero-word"><em><span><img className="hero-title-b" src={key1} alt="B" /></span>anage.</em></span>
+                        <br /><span className="hero-word"><span><img className="hero-title-b" src={key2} alt="B" /></span>utomate.</span>
                     </h1>
 
                     <p className="hero-sub">
