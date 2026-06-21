@@ -79,6 +79,10 @@ export default function ServicesCarousel() {
                 <div className="sc-track" ref={trackRef}>
                     {extendedServices.map((s, i) => (
                         <article className="sc-card" key={i}>
+                            <div className="sc-card__accent" />
+                            <div className="sc-card__grid">
+                                <span /><span /><span /><span />
+                            </div>
                             <p className="sc-card__tag">{s.tag}</p>
                             <h3 className="sc-card__title">{s.title}</h3>
                             <p className="sc-card__desc">{s.desc}</p>

@@ -388,13 +388,44 @@
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 992px) {
+    .hero-title-b {
+        margin-right: -40px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
-        font-size: clamp(30px, 8vw, 48px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: clamp(36px, 10vw, 52px);
+    }
+
+    .hero-title br {
+        display: none;
     }
 
     .hero-sub {
-        font-size: 14px;
+        font-size: 15px;
+        max-width: 360px;
+    }
+
+    .hero-main {
+        padding-top: 100px;
+        padding-bottom: 10px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .hero-btns {
+        margin-bottom: 24px;
+    }
+
+    .btn-white,
+    .btn-dark {
+        padding: 15px 32px;
+        font-size: 15px;
     }
 
     .db-cards {
@@ -416,7 +447,7 @@
     }
 
     .hero-title-b {
-        margin-right: -25px;
+        margin-right: -30px;
     }
 
 }

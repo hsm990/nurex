@@ -369,8 +369,7 @@ nav.scrolled .nav-cta:hover {
     }
 }
 
-@media (max-width: 768px) {
-
+@media (max-width: 992px) {
     .links,
     .social,
     .nav-cta {
