@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import { navLinks } from '@/constants'
-import logo from '../../assets/images/logo1.png'
-import { FaFacebookF, FaInstagram } from "react-icons/fa"
+import { FaFacebookF, FaInstagram, FaUser } from "react-icons/fa"
 import { HiMenuAlt3, HiX } from "react-icons/hi"
 import '@/styles/nav.css'
 
 export default function Navbar() {
-
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const activePath = window.location.pathname
@@ -16,40 +14,33 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 992) {
-        setMenuOpen(false)
-      }
+      if (window.innerWidth > 992) setMenuOpen(false)
     }
     window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
-  const closeMenu = () => {
-    setMenuOpen(false)
-  }
+
   return (
     <>
       <nav className={scrolled ? 'scrolled' : ''}>
         <div className="nav-container">
-          <a href="/" className="logo">
-            <img src={logo} alt="Logo" />
+          <a href="/" className="logo-pill">
+            <span className="logo-icon"><FaUser /></span>
+            <span className="logo-text">NUXAR</span>
           </a>
-          <div className="links">
+
+          <div className="nav-links-pill liquid-glass">
             <ul className="nav-links">
               {navLinks.map((link) => (
                 <li key={link.path}>
                   <a
                     href={link.path}
-                    className={
-                      activePath === link.path ? 'active' : ''
-                    }
+                    className={activePath === link.path ? 'active' : ''}
                   >
                     {link.label}
                   </a>
@@ -57,44 +48,24 @@ export default function Navbar() {
               ))}
             </ul>
           </div>
+
           <div className="nav-right">
-            <div className="social">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="social-span"
-                aria-label="Facebook"
-              >
+            <div className="social-pill liquid-glass">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-btn" aria-label="Facebook">
                 <FaFacebookF />
               </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="social-span"
-                aria-label="Instagram"
-              >
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-btn" aria-label="Instagram">
                 <FaInstagram />
               </a>
             </div>
-            <a href="#contact" className="nav-cta">
-              Contact us
-            </a>
-            <button
-              className="hamburger"
-              onClick={() => setMenuOpen(prev => !prev)}
-              aria-label="Toggle menu"
-            >
-              {
-                menuOpen
-                  ? <HiX />
-                  : <HiMenuAlt3 />
-              }
+            <a href="#contact" className="nav-cta">Contact us</a>
+            <button className="hamburger" onClick={() => setMenuOpen(prev => !prev)} aria-label="Toggle menu">
+              {menuOpen ? <HiX /> : <HiMenuAlt3 />}
             </button>
           </div>
         </div>
       </nav>
+
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <ul>
           {navLinks.map((link) => (
@@ -105,9 +76,7 @@ export default function Navbar() {
                 onClick={(e) => {
                   e.preventDefault()
                   setMenuOpen(false)
-                  setTimeout(() => {
-                    window.location.href = link.path
-                  }, 250)
+                  setTimeout(() => { window.location.href = link.path }, 250)
                 }}
               >
                 {link.label}
@@ -116,39 +85,19 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="mobile-bottom">
-          <div className="social">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noreferrer"
-              className="social-span"
-              aria-label="Facebook"
-            >
+          <div className="social-pill liquid-glass">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-btn" aria-label="Facebook">
               <FaFacebookF />
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              className="social-span"
-              aria-label="Instagram"
-            >
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-btn" aria-label="Instagram">
               <FaInstagram />
             </a>
           </div>
-          <a
-            href="#contact"
-            className="nav-cta"
-            onClick={closeMenu}
-          >
-            Contact us
-          </a>
+          <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>Contact us</a>
         </div>
       </div>
-      <div
-        className={`menu-overlay ${menuOpen ? 'open' : ''}`}
-        onClick={closeMenu}
-      />
+
+      <div className={`menu-overlay ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)} />
     </>
   )
 }

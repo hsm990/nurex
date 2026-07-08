@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono&display=swap');
 
 *,
 *::before,
@@ -10,28 +10,102 @@
 
 body {
     margin: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
-    --brand: #2563FF;
-    --brand-hover: #1A4FD8;
-    --text: #0B0F1A;
-    --text-muted: #6B7280;
-    --pill-bg: #F0F2F8;
+    --background: 220 60% 6%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 240 4% 66%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 40% 10%;
+    --muted: 220 40% 10%;
+    --accent: 217 91% 60%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+
+    --brand: hsl(217, 91%, 60%);
+    --brand-hover: hsl(217, 85%, 50%);
+    --text: hsl(0, 0%, 100%);
+    --text-muted: hsl(240, 4%, 66%);
+    --pill-bg: rgba(255, 255, 255, 0.06);
     --nav-bg: transparent;
-    --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
-    --nav-border-scrolled: rgba(0, 0, 0, 0.08);
+    --nav-bg-scrolled: rgba(11, 15, 26, 0.88);
+    --nav-border-scrolled: rgba(255, 255, 255, 0.08);
     --radius-pill: 999px;
-    --radius-item: 15px;
+    --radius-item: 16px;
     --transition: 0.25s ease;
 
-    --color-midnight: #0B0F1A;
-    --color-brand: #2563FF;
-    --color-accent: #10B981;
+    --color-midnight: hsl(220, 60%, 6%);
+    --color-brand: hsl(217, 91%, 60%);
+    --color-accent: hsl(217, 91%, 60%);
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 }
+
+.liquid-glass {
+    background: rgba(255, 255, 255, 0.03);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+        rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 20%,
+        rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.35) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+@keyframes fade-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+    100% { transform: translate(30px, -20px) scale(1.08); opacity: 0.5; }
+}
+
+@keyframes drift-reverse {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.25; }
+    100% { transform: translate(-25px, 15px) scale(1.05); opacity: 0.4; }
+}
+
+@keyframes drift-slow {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+    100% { transform: translate(20px, 25px) scale(1.1); opacity: 0.35; }
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
+.animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
+.animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
+.animate-fade-rise-delay-3 { animation: fade-rise 0.8s ease-out 0.6s both; }
+.animate-drift { animation: drift 12s ease-in-out infinite alternate; }
+.animate-drift-reverse { animation: drift-reverse 14s ease-in-out infinite alternate; }
+.animate-drift-slow { animation: drift-slow 16s ease-in-out infinite alternate; }
 
 .main-content {
     padding-top: 88px;

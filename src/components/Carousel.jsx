@@ -3,13 +3,18 @@ import "@/styles/ServicesCarousel.css";
 
 const services = [
     {
+        title: "AI Automation",
+        tag: "AI & Automation",
+        desc: "Hand off the repetitive work. Reports, follow-ups, data entry — automated so your team focuses on what only humans can do.",
+    },
+    {
         title: "Website Building",
         tag: "Web Development",
         desc: "Fast, modern websites built around your business — from sharp landing pages to full multi-section platforms that hold up on every screen.",
     },
     {
         title: "Restaurant Systems",
-        tag: "Management System",
+        tag: "Restaurant Tech",
         desc: "Orders, tables, menus, staff — one dashboard. Built for the pace of a real restaurant, not a boardroom demo.",
     },
     {
@@ -21,11 +26,6 @@ const services = [
         title: "Shop Management",
         tag: "Retail System",
         desc: "Track stock, log sales, manage suppliers. Your shop runs better when the numbers aren't scattered across three spreadsheets.",
-    },
-    {
-        title: "AI Automation",
-        tag: "AI & Automation",
-        desc: "Hand off the repetitive work. Reports, follow-ups, data entry — automated so your team focuses on what only humans can do.",
     },
 ];
 
@@ -78,8 +78,7 @@ export default function ServicesCarousel() {
             >
                 <div className="sc-track" ref={trackRef}>
                     {extendedServices.map((s, i) => (
-                        <article className="sc-card" key={i}>
-                            <div className="sc-card__accent" />
+                        <article className="sc-card liquid-glass" key={i}>
                             <div className="sc-card__grid">
                                 <span /><span /><span /><span />
                             </div>
