@@ -1,120 +1,83 @@
 nav {
-    padding: 14px 0;
+    padding: 16px 0;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--nav-bg);
-    transition:
-        background var(--transition),
-        backdrop-filter var(--transition),
-        box-shadow var(--transition),
-        padding var(--transition);
+    background: transparent;
+    transition: background 0.3s ease, padding 0.3s ease;
 }
 
 nav.scrolled {
-    background: var(--nav-bg-scrolled);
+    background: rgba(11, 15, 26, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow:
-        0 1px 0 var(--nav-border-scrolled),
-        0 4px 24px rgba(0, 0, 0, 0.06);
-    padding: 0;
+    padding: 8px 0;
 }
 
-/* ── Container ───────────────────────────────────────────────────────────── */
 .nav-container {
     width: 90%;
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    position: relative;
-    transition:
-        gap var(--transition),
-        width var(--transition),
-        max-width var(--transition),
-        padding var(--transition);
+    gap: 12px;
 }
 
-nav.scrolled .nav-container {
-    width: 90%;
-    max-width: 1400px;
-    gap: 10px;
+.logo-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+    padding: 8px 20px 8px 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
 }
 
-/* ── Logo ────────────────────────────────────────────────────────────────── */
-.logo {
-    width: 150px;
-    height: 60px;
-    background: var(--pill-bg);
+.logo-pill:hover {
+    transform: scale(1.03);
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: hsl(217, 91%, 60%);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-item);
-    cursor: pointer;
-    text-decoration: none;
-    flex-shrink: 0;
-    transition:
-        box-shadow var(--transition),
-        transform var(--transition),
-        border-radius var(--transition),
-        background var(--transition),
-        width var(--transition),
-        padding var(--transition);
+    color: #fff;
+    font-size: 13px;
 }
 
-nav.scrolled .logo {
-    border-radius: 0;
-    background: transparent;
-    width: 160px;
-    padding: 0 20px;
+.logo-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: #000;
 }
 
-.logo:hover {
-    box-shadow: 0 4px 16px rgba(37, 99, 255, 0.18);
-    transform: translateY(-1px);
+.nav-links-pill {
+    display: none;
+    border-radius: 999px;
+    padding: 4px 6px;
 }
 
-nav.scrolled .logo:hover {
-    transform: none;
-    box-shadow: none;
+@media (min-width: 993px) {
+    .nav-links-pill {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
-.logo img {
-    width: 120px;
-    height: auto;
-}
-
-/* ── Desktop links pill ──────────────────────────────────────────────────── */
-.links {
-    background: var(--pill-bg);
-    border-radius: var(--radius-item);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    transition:
-        border-radius var(--transition),
-        background var(--transition),
-        height var(--transition),
-        padding var(--transition);
-}
-
-nav.scrolled .links {
-    border-radius: 0;
-    background: transparent;
-    height: 60px;
-    padding: 0;
-}
-
-.links ul {
+.nav-links {
     list-style: none;
     display: flex;
     gap: 2px;
@@ -122,180 +85,116 @@ nav.scrolled .links {
     padding: 0;
 }
 
-.links .nav-links a {
+.nav-links li a {
     text-decoration: none;
-    color: var(--text-muted);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 12px 12px;
-    border-radius: var(--radius-item);
-    transition: all var(--transition);
+    color: hsl(240, 4%, 66%);
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
     display: block;
     white-space: nowrap;
 }
 
-.links .nav-links a:hover {
-    background: white;
-    color: var(--text);
+.nav-links li a:hover {
+    color: #fff;
 }
 
-.links .nav-links a.active {
-    background: white;
-    color: black;
-    box-shadow: 0 2px 8px rgba(37, 99, 255, 0.12);
+.nav-links li a.active {
+    background: #fff;
+    color: #000;
 }
 
-nav.scrolled .links .nav-links a:hover {
-    background: var(--pill-bg);
+.social-pill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    border-radius: 999px;
+    padding: 6px 8px;
 }
 
-nav.scrolled .links .nav-links a.active {
-    background: var(--pill-bg);
+.social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* ── Right group ─────────────────────────────────────────────────────────── */
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
 .nav-right {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    transition: gap var(--transition);
 }
 
-nav.scrolled .nav-right {
-    gap: 0;
-}
-
-/* ── Divider (visible only when scrolled) ────────────────────────────────── */
-.nav-divider {
-    width: 0;
-    height: 24px;
-    border-left: 0.5px solid transparent;
-    flex-shrink: 0;
-    transition: border-color var(--transition);
-}
-
-nav.scrolled .nav-divider {
-    border-left-color: rgba(0, 0, 0, 0.1);
-}
-
-/* ── Social icons pill ───────────────────────────────────────────────────── */
-.social {
-    background: var(--pill-bg);
-    border-radius: var(--radius-item);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-    transition:
-        border-radius var(--transition),
-        background var(--transition),
-        height var(--transition),
-        padding var(--transition);
-    width: 120px;
-}
-
-nav.scrolled .social {
-    border-radius: 0;
-    background: transparent;
-    height: 52px;
-    padding: 0 12px;
-}
-
-.social-span {
-    width: 90%;
-    height: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    color: var(--brand);
-    background: #F0F0F0;
-    font-size: 25px;
-    cursor: pointer;
-    transition: all var(--transition);
-    text-decoration: none;
-}
-
-.social-span:hover {
-    background: white;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(37, 99, 255, 0.15);
-}
-
-nav.scrolled .social-span:hover {
-    background: var(--pill-bg);
-    transform: none;
-    box-shadow: none;
-}
-
-/* ── CTA button ──────────────────────────────────────────────────────────── */
 .nav-cta {
-    height: 60px;
+    height: 40px;
     padding: 0 24px;
-    background: var(--brand);
-    color: white;
-    font-size: 18px;
+    background: hsl(217, 91%, 60%);
+    color: #fff;
+    font-size: 14px;
     font-weight: 600;
-    border-radius: var(--radius-item);
+    border-radius: 999px;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    transition: all var(--transition);
-    box-shadow: 0 4px 16px rgba(37, 99, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: none;
     cursor: pointer;
     font-family: var(--font-body);
 }
 
 .nav-cta:hover {
-    background: var(--brand-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37, 99, 255, 0.4);
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
 }
 
-nav.scrolled .nav-cta {
-    border-radius: 0;
-    height: 52px;
-    box-shadow: none;
-    padding: 0 28px;
-}
-
-nav.scrolled .nav-cta:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-/* ── Hamburger ───────────────────────────────────────────────────────────── */
 .hamburger {
-    display: none;
-    width: 44px;
-    height: 44px;
+    display: flex;
+    width: 40px;
+    height: 40px;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-item);
-    background: var(--pill-bg);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
     border: none;
     cursor: pointer;
-    font-size: 22px;
-    color: var(--text);
-    transition: all var(--transition);
+    font-size: 20px;
+    color: #fff;
+    transition: background 0.2s ease;
 }
 
 .hamburger:hover {
-    background: white;
+    background: rgba(255, 255, 255, 0.15);
 }
 
-/* ── Mobile menu ─────────────────────────────────────────────────────────── */
+@media (min-width: 993px) {
+    .hamburger {
+        display: none;
+    }
+}
+
 .mobile-menu {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     width: min(400px, 85vw);
-    background: rgba(255, 255, 255, 0.97);
+    background: rgba(11, 15, 26, 0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 99;
@@ -306,9 +205,7 @@ nav.scrolled .nav-cta:hover {
     transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
-    transition:
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
 }
 
 .mobile-menu.open {
@@ -328,18 +225,18 @@ nav.scrolled .nav-cta:hover {
 
 .mobile-menu ul a {
     text-decoration: none;
-    color: var(--text);
+    color: #fff;
     font-size: 28px;
     font-weight: 600;
     padding: 12px 0;
     display: block;
-    border-bottom: 1px solid #eee;
-    transition: color var(--transition);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: color 0.2s ease;
 }
 
 .mobile-menu ul a:hover,
 .mobile-menu ul a.active {
-    color: var(--brand);
+    color: hsl(217, 91%, 60%);
 }
 
 .mobile-bottom {
@@ -349,17 +246,20 @@ nav.scrolled .nav-cta:hover {
     flex-wrap: wrap;
 }
 
+.mobile-bottom .social-pill {
+    flex-shrink: 0;
+}
+
 .mobile-bottom .nav-cta {
     flex: 1;
     min-width: 140px;
 }
 
-/* ── Overlay ─────────────────────────────────────────────────────────────── */
 .menu-overlay {
     position: fixed;
     inset: 0;
     z-index: 98;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
@@ -370,38 +270,14 @@ nav.scrolled .nav-cta:hover {
     pointer-events: auto;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
-@media (max-width: 1024px) {
-    .links .nav-links a {
-        padding: 6px 10px;
-        font-size: 13px;
-    }
-}
-
 @media (max-width: 992px) {
+    nav {
+        padding: 12px 0;
+    }
 
-    .links,
-    .social,
-    .nav-cta {
+    .nav-links-pill,
+    .social-pill {
         display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .logo {
-        width: 120px;
-        height: 50px;
-    }
-
-    .logo img {
-        width: 100px;
-    }
-
-    nav.scrolled .nav-container {
-        width: 90%;
-        padding: 0;
     }
 }
 
