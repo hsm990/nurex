@@ -5,7 +5,6 @@ nav {
     left: 0;
     right: 0;
     z-index: 100;
-    background: transparent;
     transition: background 0.3s ease, padding 0.3s ease;
 }
 
@@ -16,151 +15,85 @@ nav.scrolled {
     padding: 8px 0;
 }
 
-.nav-container {
-    width: 90%;
-    max-width: 1280px;
-    margin: 0 auto;
+/* ---------- Hero-style navbar ---------- */
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    padding: 1.5rem 2rem;
+    max-width: 80rem;
+    margin: 0 auto;
 }
 
-.logo-pill {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 999px;
-    padding: 8px 20px 8px 12px;
+.logo {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.875rem;
+    color: #ffffff;
     text-decoration: none;
-    flex-shrink: 0;
-    transition: transform 0.2s ease;
 }
 
-.logo-pill:hover {
-    transform: scale(1.03);
-}
-
-.logo-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: hsl(217, 91%, 60%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 13px;
-}
-
-.logo-text {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: -0.02em;
-    color: #000;
-}
-
-.nav-links-pill {
-    display: none;
-    border-radius: 999px;
-    padding: 4px 6px;
-}
-
-@media (min-width: 993px) {
-    .nav-links-pill {
-        display: flex;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+.logo sup {
+    font-size: 0.75rem;
 }
 
 .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2px;
-    margin: 0;
-    padding: 0;
+    display: none;
+    align-items: center;
+    gap: 2rem;
 }
 
-.nav-links li a {
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+    }
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    color: #94a3b8;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    color: hsl(240, 4%, 66%);
-    padding: 8px 16px;
-    border-radius: 999px;
-    transition: all 0.2s ease;
-    display: block;
-    white-space: nowrap;
+    transition: color 0.2s ease;
 }
 
-.nav-links li a:hover {
-    color: #fff;
+.nav-link:hover,
+.nav-link--active {
+    color: #ffffff;
 }
 
-.nav-links li a.active {
-    background: #fff;
-    color: #000;
-}
-
-.social-pill {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    border-radius: 999px;
-    padding: 6px 8px;
-}
-
-.social-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.social-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.nav-cta {
-    height: 40px;
-    padding: 0 24px;
-    background: hsl(217, 91%, 60%);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 999px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* ---------- Glass buttons ---------- */
+.btn-glass {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(4px);
     border: none;
+    border-radius: 9999px;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
     cursor: pointer;
-    font-family: var(--font-body);
+    transition: transform 0.25s ease, background 0.25s ease;
 }
 
-.nav-cta:hover {
+.btn-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.btn-glass:hover {
     transform: scale(1.03);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-glass--nav {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
 }
 
 .hamburger {
@@ -182,7 +115,7 @@ nav.scrolled {
     background: rgba(255, 255, 255, 0.15);
 }
 
-@media (min-width: 993px) {
+@media (min-width: 768px) {
     .hamburger {
         display: none;
     }
@@ -239,22 +172,6 @@ nav.scrolled {
     color: hsl(217, 91%, 60%);
 }
 
-.mobile-bottom {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.mobile-bottom .social-pill {
-    flex-shrink: 0;
-}
-
-.mobile-bottom .nav-cta {
-    flex: 1;
-    min-width: 140px;
-}
-
 .menu-overlay {
     position: fixed;
     inset: 0;
@@ -270,14 +187,9 @@ nav.scrolled {
     pointer-events: auto;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     nav {
         padding: 12px 0;
-    }
-
-    .nav-links-pill,
-    .social-pill {
-        display: none;
     }
 }
 
