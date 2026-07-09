@@ -21,15 +21,20 @@
     width: 100%;
     overflow: hidden;
     background-color: var(--background);
-    /* Soft glowing mesh gradient in the background */
     background-image:
         radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.15), transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.15), transparent 25%);
     color: var(--foreground);
     font-family: var(--font-body);
+
+    /* Flex column so .hero can truly center in the space above the marquee,
+       instead of relying on a fixed top padding (which is what made the
+       title sit too high before). */
+    display: flex;
+    flex-direction: column;
 }
 
-/* ---------- Floating Panels ---------- */
+/* ---------- Decorative drifting panels (no content) ---------- */
 .glass-panels {
     position: absolute;
     inset: 0;
@@ -48,16 +53,13 @@
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
     opacity: 0;
     overflow: hidden;
-    /* Keeps images inside the rounded corners */
     animation: panel-drift var(--dur) ease-in-out var(--delay) infinite;
     pointer-events: auto;
-    /* Allow hover */
 }
 
-/* Border gradient */
 .glass-panel::after {
     content: "";
     position: absolute;
@@ -70,22 +72,6 @@
     mask-composite: exclude;
     pointer-events: none;
     z-index: 10;
-}
-
-/* Image styles inside the card */
-.panel-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.45;
-    /* Subtle by default */
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    filter: saturate(0.8) contrast(1.2);
-}
-
-.glass-panel:hover .panel-img {
-    opacity: 0.9;
-    transform: scale(1.05);
 }
 
 @keyframes panel-drift {
@@ -108,6 +94,231 @@
         opacity: 0;
         transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)) rotate(calc(var(--drot) * -1));
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .glass-panel {
+        opacity: 1;
+        animation: none;
+        transform: none;
+    }
+}
+
+/* ---------- Content panels (settle into place, hold a CSS mockup) ---------- */
+.glass-panels--content {
+    z-index: 1;
+}
+
+.glass-panel--content {
+    opacity: 0;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    animation:
+        panel-settle 1.1s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both,
+        panel-float 7s ease-in-out calc(var(--delay) + 1.1s) infinite;
+}
+
+@keyframes panel-settle {
+    0% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.96);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes panel-float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .glass-panel--content {
+        opacity: 1;
+        animation: none;
+        transform: none;
+    }
+}
+
+/* Content panels get busy on small screens — hide them, keep the decorative ones */
+@media (max-width: 900px) {
+    .glass-panels--content {
+        display: none;
+    }
+}
+
+/* ---------- Fake UI mockups drawn entirely in CSS ---------- */
+.mockup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.mockup-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.mockup-line {
+    display: block;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Dashboard mockup: topbar dots, stat cards, bar chart */
+.mockup--dashboard .mockup-topbar {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.mockup-stats {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.mockup-stat {
+    flex: 1;
+    height: 1.6rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+.mockup-chart {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.3rem;
+    padding-top: 0.25rem;
+}
+
+.mockup-chart span {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
+}
+
+/* Hero mockup: nav bar + heading lines + CTA pill */
+.mockup--hero .mockup-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mockup-navlinks {
+    display: flex;
+    gap: 0.35rem;
+    margin-left: auto;
+}
+
+.mockup-navlinks span {
+    width: 0.9rem;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mockup-heroblock {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.45rem;
+}
+
+.mockup-line--lg {
+    width: 85%;
+    height: 10px;
+}
+
+.mockup-line--md {
+    width: 65%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.mockup-line--sm {
+    width: 45%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mockup-pill {
+    width: 5rem;
+    height: 1.5rem;
+    margin-top: 0.4rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* CRM mockup: table head + rows with avatar/line/badge */
+.mockup--crm .mockup-crmhead {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mockup-crmhead span {
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.mockup-crmhead span:nth-child(1) {
+    width: 28%;
+}
+
+.mockup-crmhead span:nth-child(2) {
+    width: 42%;
+}
+
+.mockup-crmhead span:nth-child(3) {
+    width: 18%;
+    margin-left: auto;
+}
+
+.mockup-crmrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mockup-avatar {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mockup-line--row {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.mockup-badge {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 0.7rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
 }
 
 /* ---------- Liquid glass buttons ---------- */
@@ -152,62 +363,19 @@
     margin-top: 3rem;
 }
 
-/* ---------- Layout (Nav, Hero, Marquee) ---------- */
-.navbar {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    max-width: 80rem;
-    margin: 0 auto;
-}
-
-.logo {
-    font-family: var(--font-display);
-    font-size: 1.875rem;
-    color: var(--foreground);
-    text-decoration: none;
-}
-
-.logo sup {
-    font-size: 0.75rem;
-}
-
-.nav-links {
-    display: none;
-    align-items: center;
-    gap: 2rem;
-}
-
-.nav-link {
-    font-size: 0.875rem;
-    color: var(--muted-foreground);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.nav-link:hover,
-.nav-link--active {
-    color: var(--foreground);
-}
-
-@media (min-width: 768px) {
-    .nav-links {
-        display: flex;
-    }
-}
-
+/* ---------- Hero content — true flex centering, not fixed padding ---------- */
 .hero {
     position: relative;
     z-index: 10;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 1.5rem;
+    padding: 1.5rem;
+    /* leave breathing room above the marquee so centering accounts for it */
+    padding-bottom: 110px;
 }
 
 .hero-title {

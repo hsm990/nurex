@@ -1,24 +1,19 @@
 import '@/styles/hero.css'
 
-const NAV_LINKS = [
-    { label: "Home", href: "#", active: true },
-    { label: "Services", href: "#" },
-    { label: "Work", href: "#" },
-    { label: "Automation", href: "#" },
-    { label: "Contact", href: "#" },
+// Small decorative panels — no images, just glass shards drifting in from the edges
+const PANELS = [
+    { top: "6%", left: "4%", w: "12%", h: "10%", dx: "-120px", dy: "-50px", drot: "-6deg", dur: "10s", delay: "0s" },
+    { top: "78%", left: "10%", w: "10%", h: "12%", dx: "-90px", dy: "100px", drot: "5deg", dur: "11s", delay: "1.4s" },
+    { top: "8%", left: "82%", w: "11%", h: "9%", dx: "120px", dy: "-40px", drot: "-4deg", dur: "9.5s", delay: "2.2s" },
+    { top: "80%", left: "80%", w: "12%", h: "11%", dx: "110px", dy: "90px", drot: "5deg", dur: "10.5s", delay: "3.1s" },
+    { top: "42%", left: "1%", w: "8%", h: "16%", dx: "-140px", dy: "10px", drot: "6deg", dur: "12s", delay: "0.7s" },
 ];
 
-// Added 'img' properties with UI/Dashboard placeholders
-const PANELS = [
-    { top: "8%", left: "6%", w: "18%", h: "14%", dx: "-140px", dy: "-60px", drot: "-6deg", dur: "9s", delay: "0s", img: "https://i.pinimg.com/1200x/73/07/9c/73079cb83aedc740eb8daffe2665abcc.jpg" },
-    { top: "10%", left: "30%", w: "22%", h: "10%", dx: "120px", dy: "-90px", drot: "5deg", dur: "10s", delay: "1.2s", img: "https://i.pinimg.com/736x/3c/e4/3e/3ce43e00625485af5d185935b80a68bc.jpg" },
-    { top: "6%", left: "60%", w: "16%", h: "16%", dx: "160px", dy: "-40px", drot: "-4deg", dur: "8.5s", delay: "2.4s", img: "https://i.pinimg.com/1200x/de/9e/98/de9e98ae60c3a1f77f4771cbd041f44d.jpg" },
-    { top: "40%", left: "4%", w: "14%", h: "20%", dx: "-180px", dy: "20px", drot: "6deg", dur: "11s", delay: "0.6s", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" },
-    { top: "38%", left: "42%", w: "20%", h: "12%", dx: "0px", dy: "-140px", drot: "0deg", dur: "9.5s", delay: "3s", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" }, // Left this one empty as a pure glass accent
-    { top: "62%", left: "20%", w: "18%", h: "14%", dx: "-100px", dy: "120px", drot: "-5deg", dur: "10.5s", delay: "1.8s", img: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=600&q=80" },
-    { top: "68%", left: "54%", w: "22%", h: "11%", dx: "140px", dy: "100px", drot: "4deg", dur: "9s", delay: "2.9s", img: "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=600&q=80" },
-    { top: "20%", left: "78%", w: "14%", h: "18%", dx: "160px", dy: "-20px", drot: "-3deg", dur: "11.5s", delay: "0.3s", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80" },
-    { top: "70%", left: "78%", w: "16%", h: "16%", dx: "100px", dy: "120px", drot: "5deg", dur: "10s", delay: "3.6s", img: "https://i.pinimg.com/736x/2e/b4/31/2eb4313d5b99cd39a4d131426b3d84fc.jpg" },
+// Bigger panels that settle into place and hold a fake UI mockup (dashboard / hero / crm)
+const CONTENT_PANELS = [
+    { id: "dashboard", top: "10%", left: "58%", w: "26%", h: "26%", dx: "160px", dy: "-70px", delay: "0.2s" },
+    { id: "hero", top: "14%", left: "8%", w: "24%", h: "30%", dx: "-170px", dy: "-40px", delay: "0.9s" },
+    { id: "crm", top: "58%", left: "62%", w: "26%", h: "26%", dx: "150px", dy: "110px", delay: "1.6s" },
 ];
 
 function GlassPanels() {
@@ -33,9 +28,92 @@ function GlassPanels() {
                         "--dx": p.dx, "--dy": p.dy, "--drot": p.drot,
                         "--dur": p.dur, "--delay": p.delay,
                     }}
+                />
+            ))}
+        </div>
+    );
+}
+
+function DashboardMockup() {
+    return (
+        <div className="mockup mockup--dashboard">
+            <div className="mockup-topbar">
+                <span className="mockup-dot" />
+                <span className="mockup-dot" />
+                <span className="mockup-dot" />
+            </div>
+            <div className="mockup-stats">
+                <div className="mockup-stat" />
+                <div className="mockup-stat" />
+                <div className="mockup-stat" />
+            </div>
+            <div className="mockup-chart">
+                <span style={{ height: "40%" }} />
+                <span style={{ height: "65%" }} />
+                <span style={{ height: "50%" }} />
+                <span style={{ height: "85%" }} />
+                <span style={{ height: "60%" }} />
+                <span style={{ height: "95%" }} />
+            </div>
+        </div>
+    );
+}
+
+function HeroMockup() {
+    return (
+        <div className="mockup mockup--hero">
+            <div className="mockup-nav">
+                <span className="mockup-dot" />
+                <div className="mockup-navlinks">
+                    <span /><span /><span />
+                </div>
+            </div>
+            <div className="mockup-heroblock">
+                <div className="mockup-line mockup-line--lg" />
+                <div className="mockup-line mockup-line--md" />
+                <div className="mockup-line mockup-line--sm" />
+                <div className="mockup-pill" />
+            </div>
+        </div>
+    );
+}
+
+function CrmMockup() {
+    return (
+        <div className="mockup mockup--crm">
+            <div className="mockup-crmhead">
+                <span /><span /><span />
+            </div>
+            {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="mockup-crmrow">
+                    <span className="mockup-avatar" />
+                    <span className="mockup-line mockup-line--row" />
+                    <span className="mockup-badge" />
+                </div>
+            ))}
+        </div>
+    );
+}
+
+const MOCKUPS = {
+    dashboard: <DashboardMockup />,
+    hero: <HeroMockup />,
+    crm: <CrmMockup />,
+};
+
+function ContentPanels() {
+    return (
+        <div className="glass-panels glass-panels--content" aria-hidden="true">
+            {CONTENT_PANELS.map((p) => (
+                <div
+                    key={p.id}
+                    className="glass-panel glass-panel--content"
+                    style={{
+                        "--top": p.top, "--left": p.left, "--w": p.w, "--h": p.h,
+                        "--dx": p.dx, "--dy": p.dy, "--delay": p.delay,
+                    }}
                 >
-                    {/* Render the image inside the panel if it exists */}
-                    {p.img && <img src={p.img} alt="System Dashboard" className="panel-img" />}
+                    {MOCKUPS[p.id]}
                 </div>
             ))}
         </div>
@@ -46,17 +124,7 @@ export default function Hero() {
     return (
         <div className="hero-page">
             <GlassPanels />
-            <nav className="navbar">
-                <a href="#" className="logo">HSL Studio<sup>®</sup></a>
-                <div className="nav-links">
-                    {NAV_LINKS.map((link) => (
-                        <a key={link.label} href={link.href} className={`nav-link${link.active ? " nav-link--active" : ""}`}>
-                            {link.label}
-                        </a>
-                    ))}
-                </div>
-                <button className="btn-glass btn-glass--nav">Start Your Project</button>
-            </nav>
+            <ContentPanels />
 
             <section className="hero">
                 <h1 className="hero-title animate-fade-rise">

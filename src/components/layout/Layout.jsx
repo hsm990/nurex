@@ -8,8 +8,8 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {!isHome && <Navbar />}
-      <main className={!isHome ? 'main-content' : ''}>{children}</main>
+      <Navbar />
+      <main className={isHome ? '' : 'main-content'}>{children}</main>
       <Footer />
     </>
   )
