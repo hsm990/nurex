@@ -122,7 +122,7 @@ function ContentPanels() {
 
 export default function Hero() {
     return (
-        <div className="hero-page">
+        <div className="hero-page" id='hero'>
             <GlassPanels />
             <ContentPanels />
 

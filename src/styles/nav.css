@@ -1,18 +1,23 @@
 nav {
-    padding: 16px 0;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    transition: background 0.3s ease, padding 0.3s ease;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease,
+                margin-top 0.3s ease, border-radius 0.3s ease,
+                left 0.3s ease, right 0.3s ease;
 }
 
 nav.scrolled {
-    background: rgba(11, 15, 26, 0.85);
+    background: rgba(11, 15, 26, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 8px 0;
+    border-radius: 16px;
+    margin-top: 12px;
+    left: 16px;
+    right: 16px;
+    width: auto;
 }
 
 /* ---------- Hero-style navbar ---------- */
@@ -23,17 +28,11 @@ nav.scrolled {
     padding: 1.5rem 2rem;
     max-width: 80rem;
     margin: 0 auto;
+    transition: padding 0.3s ease, gap 0.3s ease;
 }
 
-.logo {
-    font-family: "Instrument Serif", serif;
-    font-size: 1.875rem;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.logo sup {
-    font-size: 0.75rem;
+nav.scrolled .navbar {
+    padding: 0.75rem 1.5rem;
 }
 
 .nav-links {
@@ -46,6 +45,26 @@ nav.scrolled {
     .nav-links {
         display: flex;
     }
+}
+
+nav.scrolled .nav-links {
+    gap: 1.25rem;
+}
+
+.logo {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.875rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: font-size 0.3s ease;
+}
+
+nav.scrolled .logo {
+    font-size: 1.5rem;
+}
+
+.logo sup {
+    font-size: 0.75rem;
 }
 
 .nav-link {
@@ -94,6 +113,12 @@ nav.scrolled {
 .btn-glass--nav {
     padding: 0.625rem 1.5rem;
     font-size: 0.875rem;
+    transition: padding 0.3s ease, font-size 0.3s ease;
+}
+
+nav.scrolled .btn-glass--nav {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8rem;
 }
 
 .hamburger {
@@ -188,8 +213,15 @@ nav.scrolled {
 }
 
 @media (max-width: 768px) {
-    nav {
-        padding: 12px 0;
+    nav.scrolled {
+        left: 8px;
+        right: 8px;
+        margin-top: 8px;
+        border-radius: 12px;
+    }
+
+    nav.scrolled .navbar {
+        padding: 0.5rem 1rem;
     }
 }
 
