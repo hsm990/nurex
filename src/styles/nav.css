@@ -1,23 +1,27 @@
 nav {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
     transition: background 0.3s ease, backdrop-filter 0.3s ease,
                 margin-top 0.3s ease, border-radius 0.3s ease,
-                left 0.3s ease, right 0.3s ease;
+                width 0.3s ease, left 0.3s ease, transform 0.3s ease;
+}
+
+nav:not(.scrolled) {
+    left: 0;
+    right: 0;
+    width: 100%;
 }
 
 nav.scrolled {
     background: rgba(11, 15, 26, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-radius: 16px;
-    margin-top: 12px;
-    left: 16px;
-    right: 16px;
-    width: auto;
+    border-radius: 20px;
+    margin-top: 16px;
+    width: min(800px, 92vw);
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* ---------- Hero-style navbar ---------- */
