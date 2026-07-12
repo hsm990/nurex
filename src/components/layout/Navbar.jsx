@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { navLinks } from '@/constants'
 import { HiMenuAlt3, HiX } from "react-icons/hi"
 import '@/styles/nav.css'
@@ -6,7 +7,18 @@ import '@/styles/nav.css'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const activePath = window.location.pathname
+  const [activeHash, setActiveHash] = useState('')
+  const location = useLocation()
+
+  const isActive = (link) => {
+    if (link.path.startsWith('#')) {
+      return activeHash === link.path
+    }
+    if (link.path === '/') {
+      return location.pathname === '/' && !activeHash
+    }
+    return location.pathname === link.path
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +36,28 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  useEffect(() => {
+    const ids = navLinks.filter(l => l.path.startsWith('#')).map(l => l.path.slice(1))
+    const targets = ids.map(id => document.getElementById(id)).filter(Boolean)
+    if (!targets.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveHash('#' + entry.target.id)
+            return
+          }
+        }
+        setActiveHash('')
+      },
+      { rootMargin: '-80px 0px -55% 0px' }
+    )
+
+    targets.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
@@ -33,7 +67,7 @@ export default function Navbar() {
             <a
               key={link.path}
               href={link.path}
-              className={`nav-link${activePath === link.path ? ' nav-link--active' : ''}`}
+              className={`nav-link${isActive(link) ? ' nav-link--active' : ''}`}
             >
               {link.label}
             </a>
@@ -51,8 +85,14 @@ export default function Navbar() {
             <li key={link.path}>
               <a
                 href={link.path}
-                className={activePath === link.path ? 'active' : ''}
+                className={isActive(link) ? 'active' : ''}
                 onClick={(e) => {
+                  if (link.path.startsWith('#')) {
+                    setMenuOpen(false)
+                    const el = document.getElementById(link.path.slice(1))
+                    if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    return
+                  }
                   e.preventDefault()
                   setMenuOpen(false)
                   setTimeout(() => { window.location.href = link.path }, 250)
